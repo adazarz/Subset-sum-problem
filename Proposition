@@ -1,0 +1,85 @@
+import decimal
+
+amounts = []
+
+#Reading sums of the invoices/suspended for accelerating testing
+"""
+print("Please paste the amounts or write 0 to proceed: ")
+n = 1
+while n != 0:
+    n = decimal.Decimal(input())
+    if n != 0:
+        amounts.append(n)
+
+target = decimal.Decimal(input("Please write the desired sum: "))
+"""
+#Temporary values for accelerating testing
+amounts = [decimal.Decimal(1),decimal.Decimal(3),decimal.Decimal(2),decimal.Decimal(8)]
+target = decimal.Decimal(9)
+shelf = {"even" : [],
+         "odd" : []}
+
+for amount in amounts:
+    if (100 * amount) % 2 == 0:
+        shelf["even"].append(amount)
+    else:
+        shelf["odd"].append(amount)
+
+#print(shelf,"\n")
+
+bucket = []
+#For keeping the index of a current number
+index = -1
+#For keeping the index of the last item in a series
+count = -1
+counting = True
+
+#Defining function for removing last items from the list
+def removing():
+    print("len",len(bucket),"count",count)
+    superfluous = len(bucket) - count
+    print("superfluous",superfluous)
+    for i in range(superfluous):
+        bucket.pop()
+    global counting
+    counting = True
+
+breaking = 0
+
+if (100 * target) % 2 == 0:
+    while index + 1 < len(shelf["even"]):
+        #Breaking for testing
+        breaking += 1
+        if breaking == 15:
+            break
+
+        index += 1
+        if counting == True:
+            count += 1
+        current = shelf["even"][index]
+        bucket.append(current)
+
+        #Printing for testing
+        print("\ncurrent",current)
+        print("index",index,"count",count)
+        print("bucket",bucket)
+        print("sum", sum(bucket))
+
+        if sum(bucket) == target:
+            print("outcome",bucket)
+            break
+        elif sum(bucket) > target:
+            bucket.pop()
+            if counting == True:
+                count -= 1
+            counting = False
+            print("end_count",count)
+        if index + 1 == len(shelf["even"]):
+            removing()
+            print("end_bucket",bucket)
+            print("end_sum",sum(bucket))
+            index = count
+            count -= 1
+            print("end_index",index,"end_count",count,"\n")
+            #Break for testing
+            #break
