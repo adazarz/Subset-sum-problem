@@ -1,1 +1,2 @@
 # Subset-sum-problem
+Hey, I am trying to solve the subset sum problem form my work, where I have often given the amount of the transfer and have to match it whith certain invoices (I work in AR), but I am actually struggling with that. My idea was to make program iterate throught the list of invoices and add them to the list "bucket" as long as the sum of items in the bucket are smaller than the target sum. If the sum goes beyond the target sum, then the program doesn't add the current sum, remembers the last but one place, where it stopped and goes further.
